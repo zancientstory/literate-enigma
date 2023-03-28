@@ -1,0 +1,41 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h> 
+#include<math.h>
+int main(void)
+{
+	int n;//n is the number of the measure
+	scanf("%d", &n);
+	double average;
+	scanf("%lf", &average);
+
+	double arr[10];
+	double sum=0;
+	for (int i = 0; i < n; i++)
+	{
+		scanf("%lf",&arr[i]);
+		arr[i] -= average;
+		sum += (arr[i] * arr[i]);
+	}
+	double bias = sqrt(sum / (n - 1));
+	switch (n) {
+	case 2:
+		bias *= 1.84;
+		break;
+	case 3:
+		bias *= 1.32;
+		break;
+	case 4:
+		bias *= 1.2;
+		break;
+	case 5:
+		bias *= 1.14;
+		break;
+	default:
+		break;
+	}
+	printf("bias = %f\n", bias);
+	double final;
+	final = bias / sqrt((double) n);
+
+	printf("不确定度=%lf", final);
+}
