@@ -1,0 +1,54 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<string.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<time.h>
+int main()
+{
+
+	char origin[20];
+	char typer[20];
+	int length, flag, right = 0;
+	float accuracy;
+	srand(time(NULL));
+	length = rand() % 15 + 1;
+
+	//初始化阶段
+	printf("#####打字程序######\n");
+	printf("字符串长度是:%d\n", length);
+	for (int i = 0; i < length; i++)
+	{
+		flag = rand() % 2;
+		if (flag)
+			origin[i] = 'a' + rand() % 26;
+		else
+			origin[i] = 'A' + rand() % 26;
+	}
+	printf("你需要输入的样本是:");
+	for (int i = 0; i < length; i++)
+		printf("%c", origin[i]);
+	printf("\n");
+
+	//输入阶段
+	printf("请输入:");
+	while (1)
+	{
+		scanf("%s", typer);
+		if (strlen(typer)>length)
+		{
+			printf("length error!\n");
+			memset(typer, 0, sizeof(typer));//重置typer
+		}
+		else
+			break;
+	}
+	for (int i = 0; i < length; i++)
+		{
+			if (origin[i] == typer[i])
+				right++;
+		}
+
+	//最终裁判阶段
+	accuracy = 100*(float)right / length;
+	printf("你的正确率是%.2f%%\n", accuracy);
+}
